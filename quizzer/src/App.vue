@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <div class="ui centered card">
+    <div v-for="quiz in quizzes" class="ui centered card">
       <div class="content">
         <div class="header">
-          {{title}}
+          {{quiz.title}}
         </div>
         <div class="meta">
-          {{description}}
+          {{quiz.description}}
         </div>
       </div>
     </div>
@@ -19,8 +19,13 @@ export default {
   components: {},
   data() {
     return {
-      title: "Chapter 1",
-      description: "This is a sample description."
+      quizzes: [{
+        title: "Chapter 1",
+        description: "This is a sample description."
+      },{
+        title: "Chapter 2",
+        description: "This is another sample description."
+      }]
     }
   }
 }
