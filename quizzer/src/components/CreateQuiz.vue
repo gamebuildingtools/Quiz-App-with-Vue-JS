@@ -1,24 +1,24 @@
 <template>
 
   <div class="ui basic content center aligned segment">
-    <button class="ui basic button icon">
+    <button class="ui basic button icon" v-show="!isCreating" v-on:click="openForm">
       <i class="plus icon"></i>
     </button>
 
-    <div class="ui centered card">
+    <div class="ui centered card" v-show="isCreating">
       <div class="content">
         <div class="ui form">
           <div class="field">
             <label>Title</label>
-            <input type="text"></input>
+            <input v-model="titleText" type="text"></input>
           </div>
           <div class="field">
             <label>Description</label>
-            <input type="text"></input>
+            <input v-model="descriptionText" type="text"></input>
           </div>
           <div class="ui two button attached buttons">
-            <button class="ui basic green button">Save</button>
-            <button class="ui basic red button">Cancel</button>
+            <button class="ui basic green button" v-on:click="saveList">Save</button>
+            <button class="ui basic red button" v-on:click="closeForm">Cancel</button>
           </div>
         </div>
       </div>
@@ -30,7 +30,25 @@
 
 <script>
 export default {
-
+  data() {
+    return {
+      isCreating: false,
+      titleText: "",
+      descriptionText: "",
+    }
+  },
+  methods: {
+    openForm() {
+      this.isCreating = true;
+    },
+    closeForm() {
+      this.isCreating = false;
+    },
+    saveList() {
+      console.log("titleText: " + this.titleText);
+      console.log("descriptionText: " + this.descriptionText);
+    }
+  }
 }
 </script>
 
