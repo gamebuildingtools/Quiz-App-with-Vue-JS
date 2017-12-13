@@ -1,26 +1,44 @@
 <template>
   <div id="app">
     <quiz-list v-bind:quizzes="quizzes"></quiz-list>
+    <create-quiz></create-quiz>
   </div>
 </template>
 
 <script>
 
 import QuizList from './components/QuizList';
+import CreateQuiz from './components/CreateQuiz';
 
 export default {
   name: 'app',
   components: {
-    QuizList
+    QuizList,
+    CreateQuiz
   },
   data() {
     return {
       quizzes: [{
         title: "Chapter 1",
-        description: "This is a sample description."
+        description: "This is a sample description.",
+        cards: [
+          {
+            term: "Some Word",
+            definition: "Some Definition"
+          },
+          {
+            term: "Another Word",
+            definition: "Another Definition of another word"
+          }
+        ]
       },{
         title: "Chapter 2",
-        description: "This is another sample description."
+        description: "This is another sample description.",
+        cards: [
+          {
+
+          }
+        ]
       }]
     }
   }

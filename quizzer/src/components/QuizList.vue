@@ -9,6 +9,11 @@
           {{quiz.description}}
         </div>
       </div>
+      <div class="extra content">
+        <span class="left floated">
+          <i class="sticky note icon"></i>{{quiz.cards.length}}
+        </span>
+      </div>
     </div>
   </div>
 </template>
