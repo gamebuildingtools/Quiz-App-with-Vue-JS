@@ -1,27 +1,19 @@
 <template>
   <div>
-    <div v-for="quiz in quizzes" class="ui centered card">
-      <div class="content">
-        <div class="header">
-          {{quiz.title}}
-        </div>
-        <div class="meta">
-          {{quiz.description}}
-        </div>
-      </div>
-      <div class="extra content">
-        <span class="left floated">
-          <i class="sticky note icon"></i>{{quiz.cards.length}}
-        </span>
-      </div>
-    </div>
+    <quiz v-for="quiz in quizzes" :key="quiz.id" v-bind:quiz="quiz"></quiz>
   </div>
 </template>
 
 
 <script>
+
+import Quiz from './Quiz';
+
 export default {
-  props: ['quizzes']
+  props: ['quizzes'],
+  components: {
+    Quiz
+  }
 }
 </script>
 
