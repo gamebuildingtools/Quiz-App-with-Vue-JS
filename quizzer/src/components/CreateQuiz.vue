@@ -17,7 +17,7 @@
             <input v-model="descriptionText" type="text"></input>
           </div>
           <div class="ui two button attached buttons">
-            <button class="ui basic green button" v-on:click="saveList">Save</button>
+            <button class="ui basic green button" v-on:click="saveQuiz">Save</button>
             <button class="ui basic red button" v-on:click="closeForm">Cancel</button>
           </div>
         </div>
@@ -44,9 +44,16 @@ export default {
     closeForm() {
       this.isCreating = false;
     },
-    saveList() {
-      console.log("titleText: " + this.titleText);
-      console.log("descriptionText: " + this.descriptionText);
+    saveQuiz() {
+      //console.log("titleText: " + this.titleText);
+      //console.log("descriptionText: " + this.descriptionText);
+      this.$emit('create-quiz', {
+        title: this.titleText,
+        description: this.descriptionText
+      });
+      this.titleText = "";
+      this.descriptionText = "";
+      this.isCreating = false;
     }
   }
 }
