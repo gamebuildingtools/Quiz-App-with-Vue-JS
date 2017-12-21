@@ -1,6 +1,6 @@
 <template>
   <div class="ui centered card">
-    <div class="content">
+    <div class="content" v-on:click="viewQuiz(quiz)">
       <div class="header">
         {{quiz.title}}
       </div>
@@ -20,6 +20,11 @@
 <script>
   export default {
     props: ['quiz'],
+    methods: {
+      viewQuiz(quiz) {
+        this.$emit('view-quiz', quiz);
+      }
+    }
   }
 </script>
 

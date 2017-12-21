@@ -1,11 +1,23 @@
 <template>
   <div>
-    <quiz v-for="quiz in quizzes" :key="quiz.id" v-bind:quiz="quiz"></quiz>
 
-    <div class="ui cards">
-      <flash-card v-for="card in quizzes[0].cards" :key="card.id" v-bind:card="card"></flash-card>
-    </div>
-    
+    <transition name="fade" mode="out-in">
+      <div v-if="viewState === 'quizzes'" key="quizzes">
+        <quiz v-for="quiz in quizzes" :key="quiz.id" v-bind:quiz="quiz" v-on:view-quiz="viewQuiz"></quiz>
+      </div>
+
+      <div v-if="viewState === 'cards'" key="cards">
+        <button class="ui labeled icon button back" v-on:click="viewQuizzes">
+          <i class="arrow circle left icon"></i>
+          Back
+        </button>
+
+        <div id="card_view" class="ui cards">
+          <flash-card v-for="card in this.selectedQuiz.cards" :key="card.id" v-bind:card="card"></flash-card>
+        </div>
+      </div>
+    </transition>
+
   </div>
 </template>
 
@@ -20,11 +32,40 @@ export default {
   components: {
     Quiz,
     FlashCard,
+  },
+  data() {
+    return {
+      selectedQuiz: {cards:[]},
+      viewState: "quizzes",
+    }
+  },
+  methods: {
+    viewQuiz(quiz) {
+      this.selectedQuiz = quiz;
+      this.viewState = "cards";
+    },
+    viewQuizzes() {
+      this.viewState = "quizzes";
+    }
   }
 }
 </script>
 
 
 <style>
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity .5s;
+}
+
+.fade-enter,
+.fade-leave-to {
+  opacity: 0;
+}
+
+#card_view {
+  margin-top: 30px;
+}
 
 </style>
