@@ -3,7 +3,7 @@
 
     <transition name="fade" mode="out-in">
       <div v-if="viewState === 'quizzes'" key="quizzes">
-        <quiz v-for="quiz in quizzes" :key="quiz.id" v-bind:quiz="quiz" v-on:view-quiz="viewQuiz"></quiz>
+        <quiz v-bind:id="'quiz_' + quiz.id" v-for="quiz in quizzes" :key="quiz.id" v-bind:quiz="quiz" v-on:view-quiz="viewQuiz" v-on:delete-quiz="deleteQuiz"></quiz>
       </div>
 
       <div v-if="viewState === 'cards'" key="cards">
@@ -53,6 +53,14 @@ export default {
       this.$emit('change-state', {
         viewState: "quizzes",
         activeQuiz: 0
+      });
+    },
+    deleteQuiz(quiz) {
+      const quizId = quiz.id;
+      const parent = this;
+      $('#quiz_' + quizId).fadeOut('slow', function() {
+        const quizIndex = parent.quizzes.indexOf(quiz);
+        parent.quizzes.splice(quizIndex, 1);
       });
     }
   }
