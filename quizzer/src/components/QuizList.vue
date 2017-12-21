@@ -43,9 +43,17 @@ export default {
     viewQuiz(quiz) {
       this.selectedQuiz = quiz;
       this.viewState = "cards";
+      this.$emit('change-state', {
+        viewState: "cards",
+        activeQuiz: quiz.id
+      });
     },
     viewQuizzes() {
       this.viewState = "quizzes";
+      this.$emit('change-state', {
+        viewState: "quizzes",
+        activeQuiz: 0
+      });
     }
   }
 }
